@@ -32,7 +32,7 @@
       <label>{{ ID_image }} </label>
     </p>
     <p>
-    <button @click="post_dpc">Отправить на обработку</button>
+    <!-- <button @click="post_dpc">Отправить на обработку</button> -->
     <button  id="btn1"  width="100" height="50" @click="getImage">Показать квиклук</button>
     <button  id="btn1"  width="100" height="50" @click="getLines">Получить линии</button>
     </p>
@@ -99,7 +99,27 @@ created() {
 
     getLines() {
       var img = document.getElementById("image_dpc");
-      this.allLine = Math.round(img.naturalHeight / (img.naturalWidth / 125) * 5 - 5);
+      var temp = Math.round(img.naturalHeight / (img.naturalWidth / 125) * 5 - 5)
+      console.log(temp)
+      if(temp % 5 != 0) {
+        // if(temp % 5 >= 6){
+        //     this.allLine = temp - (temp % 5) + 10
+        // }
+        // else if (temp % 5 <= 4){
+        //   this.allLine = temp - (temp % 5) + 5
+        // }
+        if(temp % 5 >= 6){
+            this.allLine = temp - (temp % 5) + 10
+        }
+        else if (temp % 5 < 6 && temp % 5 > 1 ){
+          this.allLine = temp - (temp % 5) + 5
+        }
+        else {
+          this.allLine = (temp  - temp % 5)
+        }
+          
+      }
+      else {this.allLine = temp}
       this.s_height = img.height
     },
 
